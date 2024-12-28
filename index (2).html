@@ -1,0 +1,213 @@
+const languageData = require('./language.json');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paytm Clone</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #002f6c;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        main {
+            margin: 0 auto;
+            padding: 1rem;
+            max-width: 800px;
+        }
+
+        /* Wallet Balance Section */
+        .wallet-balance {
+            background-color: #006cd9;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-balance h2 {
+            margin: 0 0 0.5rem;
+        }
+
+        .wallet-balance p {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+        }
+
+        .actions button {
+            background-color: #006cd9;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .actions button:hover {
+            background-color: #004a99;
+        }
+
+        /* Service Categories */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .category {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .category:hover {
+            background-color: #f4f8ff;
+        }
+
+        .category img {
+            width: 50px;
+            margin-bottom: 0.5rem;
+        }
+
+        .category p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #002f6c;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Digital Wallet</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Wallet Balance Section -->
+        <div class="wallet-balance">
+            <h2>Wallet Balance</h2>
+            <p id="wallet-balance">$0.00</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button onclick="addMoney()">Add Money</button>
+            <button onclick="transferMoney()">Send Money</button>
+        </div>
+
+        <!-- Service Categories -->
+        <div class="categories">
+            <div class="category">
+                <img src="https://img.icons8.com/color/48/000000/mobile-payment.png" alt="Recharge">
+                <p>Recharge</p>
+            </div>
+            <div class="category">
+                <img src="https://img.icons8.com/color/48/000000/water-bill.png" alt="Bills">
+                <p>Pay Bills</p>
+            </div>
+            <div class="category">
+                <img src="https://img.icons8.com/color/48/000000/bus.png" alt="Travel">
+                <p>Book Travel</p>
+            </div>
+            <div class="category">
+                <img src="https://img.icons8.com/color/48/000000/online-shop.png" alt="Shopping">
+                <p>Shopping</p>
+            </div>
+            <div class="category">
+                <img src="https://img.icons8.com/color/48/000000/health-book.png" alt="Insurance">
+                <p>Insurance</p>
+            </div>
+            <div class="category">
+                <img src="https://img.icons8.com/color/48/000000/money-transfer.png" alt="Transfer">
+                <p>Money Transfer</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Digital Wallet Clone. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        let walletBalance = 0.00;
+
+        // Function to add money
+        function addMoney() {
+            const amount = parseFloat(prompt("Enter the amount to add:"));
+            if (isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+            walletBalance += amount;
+            updateWalletBalance();
+        }
+
+        // Function to transfer money
+        function transferMoney() {
+            const amount = parseFloat(prompt("Enter the amount to send:"));
+            if (isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+            if (amount > walletBalance) {
+                alert("Insufficient balance.");
+                return;
+            }
+            walletBalance -= amount;
+            updateWalletBalance();
+        }
+
+        // Function to update the wallet balance on the screen
+        function updateWalletBalance() {
+            const balanceElement = document.getElementById("wallet-balance");
+            balanceElement.textContent = `$${walletBalance.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
